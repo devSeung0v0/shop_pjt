@@ -1,0 +1,26 @@
+$main: #ff6347;
+
+.title {
+  color: $main;
+}
+@mixin alert {
+  background-color: #eeee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  p {
+    margin-bottom: 0;
+  }
+}
+.my-alert {
+  @include alert();
+}
+.my-alert-yellow {
+  @extend .my-alert;
+  background-color: #ffe591;
+}
+.btn {
+  margin-left: 5px;
+}
