@@ -16,17 +16,17 @@ function App() {
     <Header />
     <Switch>
     <Route exact path='/'>
-    <MainBanner />
-    <div className='container'>
-        <div className='row'>
-          {
-            shoes.map((item,idx)=>{
-              return  <Product shoes={shoes[idx]} idx={idx} key={idx}/>
-            })
-          }
-          
-        </div>
-    </div>
+      <MainBanner />
+      <div className='container'>
+          <div className='row'>
+            {
+              shoes.map((item,idx)=>{
+                return  <Product shoes={shoes[idx]} idx={idx} key={idx}/>
+              })
+            }
+            
+          </div>
+      </div>
     </Route>
     <Route exact path='/detail/:id'>
       <Detail shoes={shoes}/>

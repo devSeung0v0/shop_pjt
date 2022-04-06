@@ -1,6 +1,5 @@
 import React from 'react'
 import Data from '../data'
-import { useState } from 'react'
 
 export default function Product(props){
 
