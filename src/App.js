@@ -7,9 +7,11 @@ import Product from './components/Product';
 import MainBanner from './components/MainBanner';
 import Header from './components/Header';
 import Detail from './components/Detail';
+import axios from 'axios';
 
 function App() {
   let [shoes,shoesCng] = useState(Data)
+  let [stock,stockCng] = useState([10,11,12])
   
   return (
     <div className="App">
@@ -26,10 +28,20 @@ function App() {
             }
             
           </div>
+          <button className='btn btn-primary' onClick={()=>{
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((result)=>{
+              shoesCng([...shoes,...result.data])
+             
+            })
+            .catch(()=>{
+
+            })
+          }}>View more</button>
       </div>
     </Route>
     <Route exact path='/detail/:id'>
-      <Detail shoes={shoes}/>
+      <Detail shoes={shoes} stock={stock} stockCng={stockCng}/>
     </Route>
     </Switch>
     </div>
