@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import {Nav} from 'react-bootstrap'
 import styled from 'styled-components'
 import './detail.scss'
 import StockInfo from './StockInfo'
+import TabInfo from './TabInfo'
+import {CSSTransition} from 'react-transition-group'
 
 let Box = styled.div`
   padding :20px;
@@ -21,6 +24,12 @@ export default function Detail(props){
     return shoe.id == id
   })
   let [alert,alertCng] = useState(true)
+
+  // 0413 tab 상태 저장
+  let [tab,tabCng] = useState(0)
+
+  // tab animation 스위치 상태 저장
+  let [tabSwitch,tabSwitchCng] = useState(false)
   
   useEffect(()=>{
     //Detail 페이지 방문 후 alert 창이 2초 후에 사라지게 하기
@@ -61,6 +70,22 @@ export default function Detail(props){
           <button className="btn btn-danger" onClick={()=>{history.goBack()}}>뒤로가기</button> 
         </div>
       </div>
+
+      <Nav className='mt-5' variant="tabs" defaultActiveKey="link-0">
+  <Nav.Item>
+    <Nav.Link  eventKey="link-0" onClick={()=>{tabCng(0); tabSwitchCng(false)}}>상품 설명</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="link-1" onClick={()=>{tabCng(1); tabSwitchCng(false)}}>상품 정보</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="link-2" onClick={()=>{tabCng(2); tabSwitchCng(false)}}>Q&A</Nav.Link>
+  </Nav.Item>
+</Nav>
+        <CSSTransition in={tabSwitch} classNames='smooth' timeout={800} >
+          <TabInfo tab={tab} tabSwitchCng={tabSwitchCng}/>
+        </CSSTransition>
+      
 </div>
     </>
   )
