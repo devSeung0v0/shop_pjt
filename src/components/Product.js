@@ -1,8 +1,8 @@
-import React from 'react'
-import Data from '../data'
+import React, { useContext } from 'react'
+import { stockContext } from '../App'
 
 export default function Product(props){
-
+  let stock = useContext(stockContext)
   return(
     <>
       <div className='col-md-4'>
@@ -10,6 +10,7 @@ export default function Product(props){
               <h4>{props.shoes.title}</h4>
               <p>{props.shoes.content}</p>
               <p>₩ {props.shoes.price}</p>
+              <p>재고 : {stock[props.idx]}</p>
       </div>
 
       
