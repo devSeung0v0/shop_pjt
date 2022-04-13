@@ -24,3 +24,13 @@ $main: #ff6347;
 .btn {
   margin-left: 5px;
 }
+
+//tab animation
+
+.smooth-enter {
+  opacity: 0;
+}
+.smooth-enter-active {
+  opacity: 1;
+  transition: all 700ms;
+}
