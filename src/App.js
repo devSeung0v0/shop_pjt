@@ -1,4 +1,5 @@
 
+import React from 'react';
 import './App.css';
 import { Link, Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
@@ -8,6 +9,8 @@ import MainBanner from './components/MainBanner';
 import Header from './components/Header';
 import Detail from './components/Detail';
 import axios from 'axios';
+
+export let stockContext = React.createContext()
 
 function App() {
   let [shoes,shoesCng] = useState(Data)
@@ -20,19 +23,21 @@ function App() {
     <Route exact path='/'>
       <MainBanner />
       <div className='container'>
-          <div className='row'>
-            {
-              shoes.map((item,idx)=>{
-                return  <Product shoes={shoes[idx]} idx={idx} key={idx}/>
-              })
-            }
-            
-          </div>
+
+        <stockContext.Provider value={stock}>
+            <div className='row'>
+              {
+                shoes.map((item,idx)=>{
+                  return  <Product shoes={shoes[idx]} idx={idx} key={idx}/>
+                })
+              }
+              
+            </div>
+          </stockContext.Provider>
           <button className='btn btn-primary' onClick={()=>{
             axios.get('https://codingapple1.github.io/shop/data2.json')
             .then((result)=>{
               shoesCng([...shoes,...result.data])
-             
             })
             .catch(()=>{
 
