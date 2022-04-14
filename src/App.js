@@ -8,6 +8,7 @@ import Product from './components/Product';
 import MainBanner from './components/MainBanner';
 import Header from './components/Header';
 import Detail from './components/Detail';
+import Cart from './components/Cart';
 import axios from 'axios';
 
 export let stockContext = React.createContext()
@@ -45,9 +46,13 @@ function App() {
           }}>View more</button>
       </div>
     </Route>
+    <Route exact path='/cart'>
+            <Cart />
+          </Route>
     <Route exact path='/detail/:id'>
       <Detail shoes={shoes} stock={stock} stockCng={stockCng}/>
     </Route>
+    
     </Switch>
     </div>
   );
