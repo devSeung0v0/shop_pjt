@@ -5,9 +5,41 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
-let store = createStore(()=>{ return [{id:0, name: 'sandle',price: 15000, quan: 2}]})
+
+let defaultState = [
+  {id:0, name: 'sandle',price: 15000, quan: 2},
+  {id:1, name:'rain boots', price: 28000, quan:1}
+]
+
+const reducer = (state = defaultState, action)=>{
+  if( action.type === 'itemPlus'){
+    let copyState = [...state]
+    copyState.push(action.payload)
+    return copyState
+  }
+  else if(action.type === 'quanPlus'){
+    let copyState = [...state]
+    copyState[0].quan ++
+    return copyState
+
+  }else if(action.type === 'quanMinus'){
+    let copyState = [...state]
+    copyState[0].quan --
+    
+    if(copyState[0].quan < 0){
+      copyState[0].quan = 0
+    } 
+    return copyState
+
+  }else{
+    return state
+  }
+ 
+}
+
+let store = createStore(combineReducers({reducer}))
 
 
 
