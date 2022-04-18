@@ -6,6 +6,7 @@ import './detail.scss'
 import StockInfo from './StockInfo'
 import TabInfo from './TabInfo'
 import {CSSTransition} from 'react-transition-group'
+import { connect } from 'react-redux'
 
 let Box = styled.div`
   padding :20px;
@@ -15,7 +16,7 @@ let Title = styled.h4`
   color : ${ [props => props.color]};//색상을 props로 내려주기
 `
 
-export default function Detail(props){
+export function Detail(props){
   
   let { id } = useParams();//파라미터 값을 저장해서 변수로 만들어서 쓸 수 있다.
   let history = useHistory();
@@ -66,7 +67,11 @@ export default function Detail(props){
           <p>{findId.content}</p>
           <p>₩{findId.price}</p>
           <StockInfo stock={props.stock}/>
-          <button className="btn btn-danger" onClick={()=>{orderClick()}}>주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+            orderClick();
+            props.dispatch({type: 'itemPlus', payload: {id:findId.id, name: findId.title, price:findId.price, quan: 1}});
+            history.push('/cart')
+            }}>주문하기</button> 
           <button className="btn btn-danger" onClick={()=>{history.goBack()}}>뒤로가기</button> 
         </div>
       </div>
@@ -91,3 +96,11 @@ export default function Detail(props){
   )
 
 }
+
+function getStore(state){
+  return{
+    state : state.reducer
+  }
+}//redux store 데이터 가져와서 props로 변환해주는 함수(state를 props화)
+
+export default connect(getStore)(Detail)
