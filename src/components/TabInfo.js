@@ -15,15 +15,15 @@ export default function TabInfo(props){
 
   if(props.tab===0){
     return(
-      <TabBox>상품 설명 내용입니다.</TabBox>
+      <TabBox>상품 정보 내용입니다.</TabBox>
     )
   }else if(props.tab===1){
     return(
-      <TabBox>상품 정보 내용입니다.</TabBox>
+      <TabBox>배송 정보 내용입니다.</TabBox>
     )
   }else{
     return(
-      <TabBox>Q&A 내용입니다.</TabBox>
+      <TabBox>환불 약관 내용입니다.</TabBox>
     )
   }
   
