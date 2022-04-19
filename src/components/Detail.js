@@ -52,11 +52,10 @@ export function Detail(props){
         <Box>
         <Title className='title'>PRODUCT DETAIL</Title>
         </Box>
-        { alert===true
-          ?<div className='my-alert-yellow'>
-            <p>품절 임박! 구매를 서두르세요.</p>
-          </div>
-          : null
+        { alert===true 
+          && <div className='my-alert-yellow'>
+                <p>품절 임박! 구매를 서두르세요.</p>
+              </div>
         }
       <div className="row">
         <div className="col-md-6">
@@ -69,7 +68,7 @@ export function Detail(props){
           <StockInfo stock={props.stock}/>
           <button className="btn btn-danger" onClick={()=>{
             orderClick();
-            props.dispatch({type: 'itemPlus', payload: {id:findId.id, name: findId.title, price:findId.price, quan: 1}});
+            props.dispatch({type: 'itemPlus', data: {id:findId.id, name: findId.title, price:findId.price, quan: 1}});
             history.push('/cart')
             }}>주문하기</button> 
           <button className="btn btn-danger" onClick={()=>{history.goBack()}}>뒤로가기</button> 
@@ -78,13 +77,13 @@ export function Detail(props){
 
       <Nav className='mt-5' variant="tabs" defaultActiveKey="link-0">
   <Nav.Item>
-    <Nav.Link  eventKey="link-0" onClick={()=>{tabCng(0); tabSwitchCng(false)}}>상품 설명</Nav.Link>
+    <Nav.Link  eventKey="link-0" onClick={()=>{tabCng(0); tabSwitchCng(false)}}>상품 정보</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link eventKey="link-1" onClick={()=>{tabCng(1); tabSwitchCng(false)}}>상품 정보</Nav.Link>
+    <Nav.Link eventKey="link-1" onClick={()=>{tabCng(1); tabSwitchCng(false)}}>배송 정보</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link eventKey="link-2" onClick={()=>{tabCng(2); tabSwitchCng(false)}}>Q&A</Nav.Link>
+    <Nav.Link eventKey="link-2" onClick={()=>{tabCng(2); tabSwitchCng(false)}}>환불 약관</Nav.Link>
   </Nav.Item>
 </Nav>
         <CSSTransition in={tabSwitch} classNames='smooth' timeout={800} >
