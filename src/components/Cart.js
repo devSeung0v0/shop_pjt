@@ -46,22 +46,19 @@ export function Cart(props){
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.quan}</td>
-                <td><CngBtn className="btn btn-danger" onClick={()=>{ dispatch({ type : 'quanPlus'}) }}>+</CngBtn></td>
-                <td><CngBtn className="btn btn-danger" onClick={()=>{ dispatch({ type : 'quanMinus'}) }}>-</CngBtn></td>
+                <td><CngBtn className="btn btn-danger" onClick={()=>{ dispatch({ type : 'quanPlus', data: item.id}) }}>+</CngBtn></td>
+                <td><CngBtn className="btn btn-danger" onClick={()=>{ dispatch({ type : 'quanMinus', data: item.id}) }}>-</CngBtn></td>
               </tr>
             )
           })
         }
       </tbody>
   </Table>
-  { alert === true
-    ?(
-      <div className='my-alert-yellow'>
+  { alert === true  
+    &&  <div className='my-alert-yellow'>
           <p>🎉 지금 구매하시면 타임 세일 20%</p>
           <CloseBtn className="btn btn-danger" onClick={()=>{alertClose()}}>닫기</CloseBtn>
-      </div>
-    )
-    : null
+        </div>
   }
     </>
   )
