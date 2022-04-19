@@ -15,28 +15,36 @@ let defaultState = [
 
 const reducer = (state = defaultState, action)=>{
   if( action.type === 'itemPlus'){
-    let copyState = [...state]
-    copyState.push(action.payload)
-    return copyState
+    let found = state.findIndex((item)=>{return item.id === action.data.id})// findIndex : array 안에서 원하는 데이터 찾아주는 함수, 조건식이 맞으면 몇번째 인덱스에 있는지를 반환
+    if(found >= 0){
+      let copyState = [...state]
+      copyState[found].quan ++
+      return copyState
+    } else {
+      let copyState = [...state]
+      copyState.push(action.data)
+      return copyState
+    }
   }
   else if(action.type === 'quanPlus'){
     let copyState = [...state]
-    copyState[0].quan ++
+    copyState[action.data].quan ++
     return copyState
 
   }else if(action.type === 'quanMinus'){
     let copyState = [...state]
-    copyState[0].quan --
+    copyState[action.data].quan --
     
-    if(copyState[0].quan < 0){
-      copyState[0].quan = 0
+    if(copyState[action.data].quan < 0){
+      copyState[action.data].quan = 0
     } 
     return copyState
 
-  }else{
+  }
+  else{
     return state
   }
- 
+
 }
 
 let store = createStore(combineReducers({reducer}))
